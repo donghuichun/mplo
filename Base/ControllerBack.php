@@ -7,7 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use mplo\Base\Controller as BaseController;
 
-class Controller extends BaseController
+class ControllerBack extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
