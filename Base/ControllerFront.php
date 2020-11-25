@@ -9,8 +9,4 @@ class ControllerFront extends BaseController
 {
     use ValidatesRequests;
     
-    public function hello()
-    {
-        return 'ok';
-    }
 }
