@@ -38,6 +38,7 @@ class BlueprintExt {
         $table->timestamps();
         $table->integer('creator')->nullable(false)->default(0)->comment('创建人id');
         $table->integer('updator')->nullable(false)->default(0)->comment('更新人id');
+        $table->char('ip', 15)->nullable(false)->default(0)->comment('操作的ip');
         $table->softDeletes();
     }
     

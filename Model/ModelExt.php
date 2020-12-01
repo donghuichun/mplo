@@ -17,9 +17,24 @@ class ModelExt extends Model {
 
     public function __construct(array $attributes = array()) {
         parent::__construct($attributes);
-        $this->creator = Auth::$userId;
-        $this->t_id = Auth::$tIdIn;
+        
+        $this->initGlobalValue();
+    }
+    
+    /**
+     * 初始化全局插入更新的字段的值
+     * @return void
+     */
+    private function initGlobalValue(){
+        if(Auth::$userId){
+            $this->creator = Auth::$userId;
+        }
+        if(Auth::$tIdIn){
+            $this->t_id = Auth::$tIdIn;
+        }
+        
         $this->m_id = 2;
+        $this->ip = request()->ip();
     }
 
     /**

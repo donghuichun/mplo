@@ -15,6 +15,7 @@ use mplo\Lib\Res;
 use mplo\Lib\Redis;
 use mplo\Lib\Auth;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\Debugbar\Facade;
 
 class VerifyAccessToken {
     
@@ -27,7 +28,6 @@ class VerifyAccessToken {
      * @return mixed
      */
     public function handle(Request $request, Closure $next) {
-        
         $accessToken = $request->header('Access-Token') ? $request->header('Access-Token') : $request->access_token;
         $accessUserId = $request->header('Access-User-Id') ? $request->header('Access-User-Id') : $request->access_user_id;
         $accessTId = $request->header('Access-T-Id') ? $request->header('Access-T-Id') : $request->access_t_id;
@@ -73,8 +73,10 @@ class VerifyAccessToken {
         Auth::setUserId($tokeArr['data']['user_id']);
         Auth::settId($tokeArr['data']['t_id']);
         Auth::settIdIn($tokeArr['data']['t_id_in']);
-
+        
         return $next($request);
     }
+    
+    
 
 }

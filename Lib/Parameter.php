@@ -24,6 +24,9 @@ class Parameter {
      * @return string | bool
      */
     public static function checkParams($params, $rules, $messages = [], $custom = []) {
+        if(!$params){
+            return true;
+        }
         $validator = Validator::make($params, $rules, $messages, $custom);
         if ($validator->fails()) {
             $requestValidateResult = '';
@@ -34,6 +37,19 @@ class Parameter {
             return $requestValidateResult;
         }
         return true;
+    }
+    
+    /**
+     * 获取访问的控制器名称、方法名称
+     * @param boolen $controllerAll 是否返回控制器名称全称
+     * @return array
+     */
+    public static function getControllerActionName($controllerAll = false){
+        $action = app('request')->route()->getAction();
+        $controller = class_basename($action['controller']);
+        list($controller, $actionName) = explode('@', $controller); 
+        $controllerName = $controllerAll ? $controller : lcfirst(substr($controller, 0, strrpos($controller, "Controller")));
+        return [$controllerName, $actionName];
     }
 
     

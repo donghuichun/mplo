@@ -2,6 +2,7 @@
 
 /* 
  * 账号
+ * 
  * @author donghc
  * @copyright Copyright (c) 2020 All Rights Reserved
  */
@@ -14,19 +15,19 @@ class Auth{
      * 账号id
      * @var type 
      */
-    public static $userId;
+    public static $userId = 1; //默认值
     
     /**
      * 租户id
      * @var type 
      */
-    public static $tId;
+    public static $tId = 1; //默认值
     
     /**
      * 访问中租户id
      * @var type 
      */
-    public static $tIdIn;
+    public static $tIdIn = 1; //默认值
     
     public static function setUserId($userId){
         self::$userId = $userId;
