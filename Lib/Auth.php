@@ -29,6 +29,11 @@ class Auth{
      */
     public static $tIdIn = 1; //默认值
     
+    /**
+     * 访问的授权令牌
+     */
+    public static $accessToken = ''; 
+    
     public static function setUserId($userId){
         self::$userId = $userId;
     }
@@ -51,5 +56,13 @@ class Auth{
     
     public static function gettIdIn(){
         return self::$tIdIn;
+    }
+    
+    public static function setaccessToken($accessToken){
+        self::$accessToken = $accessToken;
+    }
+    
+    public static function getaccessToken(){
+        return self::$accessToken;
     }
 }

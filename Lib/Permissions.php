@@ -34,6 +34,24 @@ class Permissions{
         return self::$permission;
     }
     
+    public static function getApp($appSignKey = false){
+        $app = require(base_path('App.php'));
+        
+        if($appSignKey && $app){
+            foreach($app as $v){
+                $newapp[$v['key']] = $v;
+            }
+            $app = $newapp;
+        }
+        
+        return $app;
+    }
+    
+    public static function getAction(){
+        $ret = require(base_path('PermissionActions.php'));
+        return $ret;
+    }
+    
     /**
      * 判断访问方法是否有权限
      * sys_allocates=0 需要进行权限验证

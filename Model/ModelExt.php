@@ -12,20 +12,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use mplo\Lib\Parameter;
 use mplo\Lib\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ModelExt extends Model {
 
-    public function __construct(array $attributes = array()) {
+    public function __construct(array $attributes = array(), $setValueArr = array()) {
         parent::__construct($attributes);
         
-        $this->initGlobalValue();
+        $this->initGlobalValue($setValueArr);
     }
     
     /**
      * 初始化全局插入更新的字段的值
      * @return void
      */
-    private function initGlobalValue(){
+    private function initGlobalValue($setValueArr){
+        if($setValueArr){
+            foreach($setValueArr as $key=>$value){
+                $this->$key = $value;
+            }
+        }
+        
         if(Auth::$userId){
             $this->creator = Auth::$userId;
         }
@@ -33,7 +40,7 @@ class ModelExt extends Model {
             $this->t_id = Auth::$tIdIn;
         }
         
-        $this->m_id = 2;
+        $this->m_id = static::$mId;
         $this->ip = request()->ip();
     }
 
